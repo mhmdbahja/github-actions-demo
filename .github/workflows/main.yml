@@ -1,0 +1,30 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-docker-1:
+    runs-on: ubuntu-latest
+
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Login to GitHub container registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+      
+
+
+    
