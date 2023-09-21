@@ -16,6 +16,14 @@ jobs:
         run: | 
           echo "hello"
           echo "hello2"
-
+          
+  build-docker-2:
+      needs: [build-docker-1]
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+    
+        - name: echo
+          run: sleep 20
 
     
