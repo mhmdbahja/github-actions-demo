@@ -8,7 +8,13 @@ on:
 
 jobs:
   build-docker-1:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+
+    runs-on: $${{ matrix.os }}
+    stratgy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, maxOS-latest]
+    
     steps:
     - uses: actions/checkout@v3
     
